@@ -1,0 +1,23 @@
+name: Daily Soccer Analysis
+on:
+  schedule:
+    - cron: '0 8 * * *' # Runs at 8 AM GMT (Ghana Time) every day
+  workflow_dispatch: # Allows you to test it manually
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Run Analyst
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          pip install requests
+          python main.py
