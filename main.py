@@ -30,7 +30,7 @@ def run_pro_analysis():
                 o_prob = int(pred.get('goals', {}).get('over', "0%").replace('%', ''))
                 
                 # Selection logic for high-confidence picks
-                if h_prob >= 75 or o_prob >= 80:
+                if h_prob >= 65 or o_prob >= 70:
                     all_picks.append({
                         'match': f"{item['teams']['home']['name']} vs {item['teams']['away']['name']}",
                         'advice': pred['advice'],
